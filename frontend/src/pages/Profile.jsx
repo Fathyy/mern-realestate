@@ -1,6 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { app } from '../firebase';
+import {
+  updateUserStart,
+  updateUserSuccess,
+  updateUserFailure,
+  // deleteUserFailure,
+  // deleteUserStart,
+  // deleteUserSuccess,
+  // signOutUserStart,
+} from '../redux/user/userSlice';
+import { useDispatch } from 'react-redux';
 
 
 const Profile = () => {
@@ -9,6 +19,7 @@ const { currentUser, loading, error } = useSelector((state) => state.user);
 const [file, setFile] = useState(undefined);
 const [filePerc, setFilePerc] = useState(0);
 const [formData, setFormData] = useState({});
+const [updateSuccess, setUpdateSuccess] = useState(false);
 const [fileUploadError, setFileUploadError] = useState(false);
 const dispatch = useDispatch();
 
@@ -48,6 +59,10 @@ const dispatch = useDispatch();
         );
       }
     );
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
