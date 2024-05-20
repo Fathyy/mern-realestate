@@ -13,6 +13,7 @@ import {
   FaParking,
   FaShare,
 } from 'react-icons/fa';
+import Contact from "../Components/Contact";
 
 const Listing = () => {
   const params = useParams();
@@ -20,6 +21,7 @@ const Listing = () => {
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false);
+  const [contact, setContact] = useState(false)
 
 
   useEffect(() => {
