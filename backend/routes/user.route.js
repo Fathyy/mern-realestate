@@ -1,6 +1,5 @@
 // we use express to create routes
 import express from 'express';
-import { test } from '../controllers/user.controller';
 import { deleteUser, test, updateUser,  getUserListings, getUser} from '../controllers/user.controller.js';
 import { verifyToken } from '../Utils/verifyUser.js'
 const router = express.Router();

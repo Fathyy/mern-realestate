@@ -4,12 +4,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import "swiper/css/bundle";
 import { Navigation } from "swiper/modules";
+import { ListingItem } from "../Components";
 
 const Home = () => {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
   SwiperCore.use([Navigation]);
+  console.log(offerListings);
 
   useEffect(() => {
     const fetchOfferListings = async () => {
@@ -39,7 +41,7 @@ const Home = () => {
         const data = await res.json();
         setSaleListings(data);
       } catch (error) {
-        log(error);
+        console.log(error);
       }
     };
     fetchOfferListings();
@@ -64,7 +66,7 @@ const Home = () => {
           to={"/search"}
           className="text-xs sm:text-sm text-blue-800 font-bold hover:underline"
         >
-          Let's get started...
+          Lets get started...
         </Link>
       </div>
 
@@ -73,14 +75,13 @@ const Home = () => {
         {offerListings &&
           offerListings.length > 0 &&
           offerListings.map((listing) => (
-            <SwiperSlide>
+            <SwiperSlide key={listing._id}>
               <div
                 style={{
                   background: `url(${listing.imageUrls[0]}) center no-repeat`,
-                  backgroundSize: "cover",
+                  backgroundSize: 'cover',
                 }}
-                className="h-[500px]"
-                key={listing._id}
+                className='h-[500px]'   
               ></div>
             </SwiperSlide>
           ))}
