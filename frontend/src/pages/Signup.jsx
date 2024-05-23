@@ -21,7 +21,7 @@ const Signup = () => {
       const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
@@ -33,14 +33,14 @@ const Signup = () => {
         return;
       }
       setLoading(false);
-      setError(error.message);
-      navigate("/sign-in");
-      setLoading(false);
+      setError(null);
+      navigate('/sign-in');
     } catch (error) {
       setLoading(false);
       setError(error.message);
     }
   };
+  
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl text-center font-semibold"></h1>

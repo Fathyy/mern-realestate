@@ -23,14 +23,15 @@ mongoose.connect(process.env.MONGO_URL)
  const app = express()
 
  app.use(express.json())
+
  app.use(cookieParser())
 
  app.listen(3000, ()=>{
     console.log('Server is running on port 3000')
  })
 
- app.use('/api/user/', userRouter)
- app.use('/api/auth/', authRouter)
+ app.use('/api/user', userRouter)
+ app.use('/api/auth', authRouter)
  app.use('/api/listing/', listingRouter)
 
 //  app.use(express.static(path.join(__dirname, '/client/dist')));
@@ -49,3 +50,12 @@ return res.status(statusCode).json({
    message
 })
  })
+
+
+ // Enable CORS for all routes
+// app.use((req, res, next) => {
+//    res.header('Access-Control-Allow-Origin', 'http://localhost:5173'); 
+//    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//    res.header('Access-Control-Allow-Headers', 'Content-Type');
+//    next();
+//  });
