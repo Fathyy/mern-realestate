@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
+import { useSelector } from 'react-redux';
+import { Navigation } from 'swiper/modules';
 import 'swiper/css/bundle';
 import {
   FaBath,
@@ -13,16 +14,19 @@ import {
   FaParking,
   FaShare,
 } from 'react-icons/fa';
-import Contact from "../Components/Contact";
+import Contact from '../components/Contact';
 
-const Listing = () => {
+// https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
+
+export default function Listing() {
+  SwiperCore.use([Navigation]);
+  const [listing, setListing] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [contact, setContact] = useState(false);
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
-  const [listing, setListing] = useState(null);
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false);
-  const [contact, setContact] = useState(false)
-
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -52,8 +56,7 @@ const Listing = () => {
       {error && (
         <p className='text-center my-7 text-2xl'>Something went wrong!</p>
       )}
-
-{listing && !loading && !error && (
+      {listing && !loading && !error && (
         <div>
           <Swiper navigation>
             {listing.imageUrls.map((url) => (
@@ -145,9 +148,6 @@ const Listing = () => {
           </div>
         </div>
       )}
-
     </main>
-  )
+  );
 }
-
-export default Listing

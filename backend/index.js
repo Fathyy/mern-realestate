@@ -5,7 +5,7 @@ import userRouter from './routes/user.route.js'
 import authRouter from './routes/auth.route.js'
 import listingRouter from './routes/listingRouter.js'
 import cookieParser from 'cookie-parser';
-// import path from 'path';
+import path from 'path';
 
 
 dotenv.config();
@@ -18,7 +18,7 @@ mongoose.connect(process.env.MONGO_URL)
    console.log(err)
 })
 
-// const __dirname = path.resolve();
+const __dirname = path.resolve();
 
  const app = express()
 
@@ -32,13 +32,13 @@ mongoose.connect(process.env.MONGO_URL)
 
  app.use('/api/user', userRouter)
  app.use('/api/auth', authRouter)
- app.use('/api/listing/', listingRouter)
+ app.use('/api/listing', listingRouter)
 
-//  app.use(express.static(path.join(__dirname, '/client/dist')));
+ app.use(express.static(path.join(__dirname, '/client/dist')));
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-// })
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+})
 
 //  middleware
  app.use((err, req, res, next) => {
@@ -48,14 +48,5 @@ return res.status(statusCode).json({
    success: false,
    statusCode,
    message
-})
- })
-
-
- // Enable CORS for all routes
-// app.use((req, res, next) => {
-//    res.header('Access-Control-Allow-Origin', 'http://localhost:5173'); 
-//    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-//    res.header('Access-Control-Allow-Headers', 'Content-Type');
-//    next();
-//  });
+});
+ });

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function Contact() {
+export default function Contact({ listing }) {
   const [landlord, setLandlord] = useState(null);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const onChange = (e) => {
     setMessage(e.target.value);
   };
@@ -50,5 +50,3 @@ function Contact() {
     </>
   );
 }
-
-export default Contact;
